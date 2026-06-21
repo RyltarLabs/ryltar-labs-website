@@ -216,7 +216,7 @@ export function Servicos() {
             <div className="absolute inset-0 bg-bg-primary/80" />
             <div className="relative z-10 flex flex-col items-center px-6 py-24 text-center">
               <h3 className="max-w-[700px] font-mono text-[clamp(24px,3.2vw,38px)] font-normal leading-[1.3] tracking-[-0.015em] text-text-primary">
-                Vamos trabalhar juntos para tornar sua ideia realidade
+                Acreditamos que grandes resultados nascem quando tecnologia e propósito caminham na mesma direção.
               </h3>
               <Button variant="primary" className="mt-16 w-full sm:w-auto rounded-none border-0 bg-[#0006FF] text-white shadow-none ring-0 
                       hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none font-mono text-[16px]" asChild>
