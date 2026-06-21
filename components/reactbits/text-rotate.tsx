@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+
+type Phase = "typing" | "pausing" | "deleting" | "waiting";
 
 interface TextRotateProps {
   words: string[];
@@ -12,11 +14,6 @@ interface TextRotateProps {
   pauseBeforeType?: number;
 }
 
-/**
- * ReactBits — TextRotate (typewriter variant)
- * Drives the hero headline word rotation per the espresso-labs spec:
- * "beyond great [word]" with character-by-character type/delete.
- */
 export function TextRotate({
   words,
   className,
@@ -27,27 +24,40 @@ export function TextRotate({
 }: TextRotateProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [phase, setPhase] = useState<Phase>("typing");
 
   useEffect(() => {
     const currentWord = words[wordIndex];
     let timeout: ReturnType<typeof setTimeout>;
 
-    if (!isDeleting && charIndex < currentWord.length) {
-      timeout = setTimeout(() => setCharIndex((c) => c + 1), typeSpeed);
-    } else if (!isDeleting && charIndex === currentWord.length) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseAfterType);
-    } else if (isDeleting && charIndex > 0) {
-      timeout = setTimeout(() => setCharIndex((c) => c - 1), deleteSpeed);
-    } else if (isDeleting && charIndex === 0) {
-      timeout = setTimeout(() => {
-        setIsDeleting(false);
-        setWordIndex((w) => (w + 1) % words.length);
-      }, pauseBeforeType);
+    switch (phase) {
+      case "typing":
+        if (charIndex < currentWord.length) {
+          timeout = setTimeout(() => setCharIndex((c) => c + 1), typeSpeed);
+        } else {
+          timeout = setTimeout(() => setPhase("pausing"), typeSpeed);
+        }
+        break;
+      case "pausing":
+        timeout = setTimeout(() => setPhase("deleting"), pauseAfterType);
+        break;
+      case "deleting":
+        if (charIndex > 0) {
+          timeout = setTimeout(() => setCharIndex((c) => c - 1), deleteSpeed);
+        } else {
+          timeout = setTimeout(() => setPhase("waiting"), deleteSpeed);
+        }
+        break;
+      case "waiting":
+        timeout = setTimeout(() => {
+          setWordIndex((w) => (w + 1) % words.length);
+          setPhase("typing");
+        }, pauseBeforeType);
+        break;
     }
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, pauseAfterType, pauseBeforeType]);
+  }, [charIndex, phase, wordIndex, words, typeSpeed, deleteSpeed, pauseAfterType, pauseBeforeType]);
 
   return (
     <span className={className}>

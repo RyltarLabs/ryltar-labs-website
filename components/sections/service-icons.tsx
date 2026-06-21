@@ -1,3 +1,5 @@
+import { Code2, Pencil, Wrench, BarChart3, Search } from "lucide-react";
+
 function base(children: React.ReactNode) {
   return (
     <svg
@@ -59,9 +61,9 @@ export function SearchIcon() {
 }
 
 export const ICON_MAP = {
-  code: CodeIcon,
-  pencil: PencilIcon,
-  wrench: WrenchIcon,
-  chart: ChartIcon,
-  search: SearchIcon,
+  code: Code2,
+  pencil: Pencil,
+  wrench: Wrench,
+  chart: BarChart3,
+  search: Search,
 } as const;

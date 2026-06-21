@@ -1,29 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { AnimatePresence, motion, useInView, type Variants } from "framer-motion";
+import { AnimatePresence, motion, useInView, UseInViewOptions, type Variants } from "framer-motion";
 
 interface BlurFadeProps {
   children: React.ReactNode;
   className?: string;
-  variant?: {
-    hidden: { y: number; opacity: number };
-    visible: { y: number; opacity: number };
-  };
   duration?: number;
   delay?: number;
   yOffset?: number;
-  inView?: boolean;
-  inViewMargin?: string;
+  inViewMargin?: UseInViewOptions["margin"];
   blur?: string;
 }
 
-/**
- * Magic UI — BlurFade
- * Scroll reveal primitive: opacity 0→1 + translateY + slight blur dissolve.
- * This is the single reveal pattern used across the entire site, per the
- * espresso-labs DNA report (ease-out-expo, ~0.8s, threshold ~0.08).
- */
 export function BlurFade({
   children,
   className,
@@ -34,7 +23,7 @@ export function BlurFade({
   blur = "4px",
 }: BlurFadeProps) {
   const ref = useRef(null);
-  const inViewResult = useInView(ref, { once: true, margin: inViewMargin as any });
+  const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
 
   const defaultVariants: Variants = {
     hidden: { y: yOffset, opacity: 0, filter: `blur(${blur})` },
@@ -48,11 +37,7 @@ export function BlurFade({
         initial="hidden"
         animate={inViewResult ? "visible" : "hidden"}
         variants={defaultVariants}
-        transition={{
-          delay,
-          duration,
-          ease: [0.16, 1, 0.3, 1],
-        }}
+        transition={{ delay, duration, ease: [0.16, 1, 0.3, 1] }}
         className={className}
       >
         {children}

@@ -1,26 +1,18 @@
 import { BlurFade } from "@/components/magicui/blur-fade";
+import { SectionLabel } from "@/components/ui/section-label";
 
 export function Statement() {
   return (
-    <section className="bg-bg-primary px-6 py-24 lg:px-[clamp(24px,5vw,64px)]">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-20">
+    <section className="border-t border-border bg-bg-primary px-6 py-36 lg:px-[clamp(24px,5vw,64px)]">
+      <div className="mx-auto flex max-w-[1000px] flex-col items-center text-center">
         <BlurFade>
-          <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.12em] text-accent">
-            <span className="h-px w-6 bg-accent" />
-            resultados
-          </div>
+          <SectionLabel className="justify-center">nossa visão</SectionLabel>
         </BlurFade>
 
         <BlurFade delay={0.1}>
-          <blockquote className="max-w-[640px] font-display text-[clamp(20px,5vw,26px)] font-light leading-[1.45] text-text-primary">
-            &ldquo;Em três meses transformamos nossa operação inteira.
-            Processos que levavam horas hoje são automáticos.&rdquo;
-          </blockquote>
-          <div className="mt-8 font-mono text-xs tracking-[0.02em] text-text-tertiary">
-            Daniela S. · Head of Operations
-            <br />
-            Empresa de saúde · Rio de Janeiro
-          </div>
+          <h2 className="mt-10 font-mono text-[clamp(30px,5vw,58px)] font-normal leading-[1.4] tracking-[-0.02em] text-text-primary">
+            "Tecnologia só é útil quando se torna <span className="italic text-text-secondary">invisível</span>. Nosso papel não é vender código, é remover os obstáculos entre o seu negócio e o crescimento."
+          </h2>
         </BlurFade>
       </div>
     </section>
