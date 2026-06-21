@@ -23,7 +23,7 @@ export function SiteFooter() {
         </nav>
 
         <span className="font-mono text-[11px] text-text-tertiary text-center">
-          © 2024 Ryltar Labs
+          © 2026 Ryltar Labs
         </span>
       </div>
     </footer>
