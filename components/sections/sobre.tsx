@@ -4,30 +4,35 @@ import { BlurFade } from "@/components/magicui/blur-fade";
 import { useEffect, useRef, useState } from "react";
 
 export function Sobre() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isInView, setIsInView] = useState(false);
+  // Refs separados para garantir que a animação dispare no momento exato do scroll, especialmente no mobile onde a seção é longa
+  const title1Ref = useRef<HTMLHeadingElement>(null);
+  const title2Ref = useRef<HTMLHeadingElement>(null);
+  const [isTitle1InView, setIsTitle1InView] = useState(false);
+  const [isTitle2InView, setIsTitle2InView] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
+    const observerOptions = { threshold: 0.5 }; // Dispara quando 50% do título estiver visível
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const observer1 = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsTitle1InView(true);
+    }, observerOptions);
 
-    return () => observer.disconnect();
+    const observer2 = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsTitle2InView(true);
+    }, observerOptions);
+
+    if (title1Ref.current) observer1.observe(title1Ref.current);
+    if (title2Ref.current) observer2.observe(title2Ref.current);
+
+    return () => {
+      observer1.disconnect();
+      observer2.disconnect();
+    };
   }, []);
 
   return (
     <section
       id="sobre"
-      ref={sectionRef}
       className="px-6 py-24 lg:px-[clamp(24px,5vw,64px)]"
     >
       <style>{`
@@ -40,6 +45,9 @@ export function Sobre() {
           background-size: 200% 100%;
           background-position: 100% 0;
           display: inline;
+          /* As regras abaixo garantem que o gradiente funcione perfeitamente quando o texto quebrar em várias linhas no celular */
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
         }
         .animate-highlight {
           animation: highlight-text 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -49,10 +57,11 @@ export function Sobre() {
       <div className="mx-auto max-w-[1200px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
           
+          {/* COLUNA ESQUERDA */}
           <div className="flex flex-col w-full">
             <BlurFade delay={0.1}>
-              <h2 className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.4] tracking-tight text-text-primary">
-                Quando a <span className={`highlight-effect ${isInView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.6s' }}>construção de algo sério</span>
+              <h2 ref={title1Ref} className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.4] tracking-tight text-text-primary">
+                Quando a <span className={`highlight-effect ${isTitle1InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>construção de algo sério</span>
                 {" "}começa antes de existir um nome
               </h2>
             </BlurFade>
@@ -84,16 +93,17 @@ export function Sobre() {
                 <img 
                   src="https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=cropv" 
                   alt="Equipe colaborando" 
-                  className="h-full w-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0"
+                  className="h-full w-full object-cover transition-all duration-500 opacity-100 grayscale-0 md:opacity-80 md:grayscale md:hover:opacity-100 md:hover:grayscale-0"
                 />
               </div>
             </BlurFade>
           </div>
 
+          {/* COLUNA DIREITA */}
           <div className="flex flex-col w-full mt-16 md:mt-[160px]">            
             <BlurFade delay={0.3}>
-              <h2 className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.1] tracking-tight text-text-primary">
-                Nossa <span className={`highlight-effect ${isInView ? 'animate-highlight' : ''}`} style={{ animationDelay: '1.2s' }}>história</span>
+              <h2 ref={title2Ref} className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.1] tracking-tight text-text-primary">
+                Nossa <span className={`highlight-effect ${isTitle2InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>história</span>
               </h2>
             </BlurFade>
 
@@ -136,7 +146,7 @@ export function Sobre() {
                 <img 
                   src="images/sections/about-section.png" 
                   alt="Código e Arquitetura" 
-                  className="h-full w-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0"
+                  className="h-full w-full object-cover transition-all duration-500 opacity-100 grayscale-0 md:opacity-80 md:grayscale md:hover:opacity-100 md:hover:grayscale-0"
                 />
               </div>
             </BlurFade>
