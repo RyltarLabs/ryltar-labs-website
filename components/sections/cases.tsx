@@ -77,11 +77,11 @@ export function Cases() {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CASES.map((c, i) => (
             <BlurFade key={c.title} delay={0.1 + i * 0.1}>
-              <div className="group overflow-hidden rounded-[6px] border border-border-subtle bg-bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/25">
-                <div className="aspect-[16/10] p-3">
+              <div className="group flex h-full flex-col overflow-hidden rounded-[6px] border border-border-subtle bg-bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/25">
+                <div className="aspect-[16/10] w-full p-3">
                   <c.Mock />
                 </div>
-                <div className="border-t border-border-subtle p-6">
+                <div className="flex flex-1 flex-col border-t border-border-subtle p-6">
                   <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
                     {c.tag}
                   </div>

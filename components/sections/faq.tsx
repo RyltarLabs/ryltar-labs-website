@@ -59,7 +59,7 @@ export function Faq() {
                 você. Envie uma mensagem e nós entraremos em contato para
                 orientá-lo.
               </p>
-              <Button variant="primary" className="mt-6 rounded-none border-0 bg-[#0006FF] text-white font-mono text-[16px] shadow-none ring-0 
+              <Button variant="primary" className="mt-6 w-full sm:w-auto rounded-none border-0 bg-[#0006FF] text-white font-mono text-[16px] shadow-none ring-0 
                       hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none" asChild>
                 <a href="#contato">entre em contato</a>
               </Button>

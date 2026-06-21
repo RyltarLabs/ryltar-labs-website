@@ -14,9 +14,6 @@ export function Servicos() {
   const [fillProgress, setFillProgress] = useState(0);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  // Scroll-driven activation: as the user scrolls past each service block,
-  // the corresponding menu item becomes active. The blue fill on the active
-  // item tracks how far the user has scrolled through that block (0 → 100%).
   useEffect(() => {
     const handleScroll = () => {
       const viewportAnchor = window.innerHeight * 0.4;
@@ -60,7 +57,6 @@ export function Servicos() {
 
   return (
     <section id="servicos" className="bg-bg-primary px-6 lg:px-[clamp(24px,5vw,64px)]">
-      {/* ── Section intro: headline + supporting copy ── */}
       <div className="mx-auto max-w-[1280px] pt-24">
         <BlurFade>
           <div className="flex items-center gap-3 font-mono text-[16px] tracking-[0.12em] text-[#0006FF]">
@@ -76,7 +72,7 @@ export function Servicos() {
               alt="..."
               width={2424}
               height={1536}
-              className="h-auto w-[50%] items-center"
+              className="h-auto w-full md:w-[70%] lg:w-[50%] items-center"
             />
           </div>
         </BlurFade>
@@ -99,11 +95,10 @@ export function Servicos() {
         </div>
       </div>
 
-      {/* ── Sticky sidebar menu + scroll-driven service blocks ── */}
       <div className="mt-28">
         <div className="mx-auto grid max-w-[1280px] grid-cols-1 px-6 lg:grid-cols-[300px_1fr] lg:gap-12 lg:px-[clamp(24px,5vw,64px)]">
-          {/* Sticky menu */}
-          <nav className="lg:sticky lg:top-[100px] lg:h-fit">
+          {/* MENU OCULTO NO MOBILE, VISÍVEL NO DESKTOP */}
+          <nav className="hidden lg:block lg:sticky lg:top-[100px] lg:h-fit">
             <div className="flex flex-col gap-2">
               {SERVICES.map((s) => {
                 const Icon = ICON_MAP[s.icon];
@@ -114,7 +109,6 @@ export function Servicos() {
                     onClick={() => scrollToService(s.id)}
                     className="relative overflow-hidden text-left"
                   >
-                    {/* Base (inactive) layer */}
                     <div
                       className={cn(
                         "flex items-center gap-3 px-4 py-4 transition-colors duration-200",
@@ -127,9 +121,6 @@ export function Servicos() {
                       </span>
                     </div>
 
-                    {/* Blue fill layer — background clips top-to-bottom by scroll
-                        progress, while the white label sits on a full-height
-                        layer above it so the text is never visually cropped. */}
                     {isActive && (
                       <>
                         <div
@@ -150,59 +141,68 @@ export function Servicos() {
             </div>
           </nav>
 
-          {/* Scrollable service blocks */}
           <div className="flex flex-col">
-            {SERVICES.map((s, i) => (
-              <div
-                key={s.id}
-                ref={(el) => {
-                  sectionRefs.current[s.id] = el;
-                }}
-                className={cn(
-                  "flex min-h-[70vh] flex-col justify-center py-12 ",
-                  i > 0 && "border-t border-border"
-                )}
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            {SERVICES.map((s, i) => {
+              const Icon = ICON_MAP[s.icon];
+              return (
+                <div
+                  key={s.id}
+                  ref={(el) => {
+                    sectionRefs.current[s.id] = el;
+                  }}
+                  className={cn(
+                    "flex min-h-[70vh] flex-col justify-center py-12 ",
+                    i > 0 && "border-t border-border"
+                  )}
                 >
-                  <h3 className="whitespace-pre-line font-mono text-[clamp(24px,2.8vw,36px)] font-normal leading-[1.25] tracking-[-0.015em] text-text-primary">
-                    {s.headline}
-                  </h3>
-
-                  <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2">
-                    <p className="text-[15px] leading-[1.85] font-light text-text-secondary">
-                      {s.body}
-                    </p>
-
-                    <div>
-                      <p className="text-[15px] leading-[1.7] text-text-primary">
-                        Os possíveis entregáveis incluem:
-                      </p>
-                      <ul className="mt-4 flex flex-col gap-3">
-                        {s.deliverables.map((d) => (
-                          <li
-                            key={d}
-                            className="flex items-start gap-3 text-[14px] leading-[1.7] font-light text-text-secondary"
-                          >
-                            <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-accent" />
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {/* TÓPICO DO MENU - VISÍVEL APENAS NO MOBILE */}
+                    <div className="flex items-center gap-3 mb-6 text-[#0006FF] lg:hidden">
+                      <Icon />
+                      <span className="font-mono text-[15px] font-medium tracking-[0.01em] uppercase">
+                        {s.menuName}
+                      </span>
                     </div>
-                  </div>
-                </motion.div>
-              </div>
-            ))}
+
+                    <h3 className="whitespace-pre-line font-mono text-[clamp(24px,2.8vw,36px)] font-normal leading-[1.25] tracking-[-0.015em] text-text-primary">
+                      {s.headline}
+                    </h3>
+
+                    <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2">
+                      <p className="text-[15px] leading-[1.85] font-light text-text-secondary">
+                        {s.body}
+                      </p>
+
+                      <div>
+                        <p className="text-[15px] leading-[1.7] text-text-primary">
+                          Os possíveis entregáveis incluem:
+                        </p>
+                        <ul className="mt-4 flex flex-col gap-3">
+                          {s.deliverables.map((d) => (
+                            <li
+                              key={d}
+                              className="flex items-start gap-3 text-[14px] leading-[1.7] font-light text-text-secondary"
+                            >
+                              <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-accent" />
+                              {d}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* ── Closing CTA: photo background + centered headline ── */}
       <div className="px-6 py-20 lg:px-[clamp(24px,5vw,64px)]">
         <BlurFade>
           <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[4px] border border-border-subtle">
@@ -218,7 +218,7 @@ export function Servicos() {
               <h3 className="max-w-[700px] font-mono text-[clamp(24px,3.2vw,38px)] font-normal leading-[1.3] tracking-[-0.015em] text-text-primary">
                 Vamos trabalhar juntos para tornar sua ideia realidade
               </h3>
-              <Button variant="primary" className="mt-16 rounded-none border-0 bg-[#0006FF] text-white shadow-none ring-0 
+              <Button variant="primary" className="mt-16 w-full sm:w-auto rounded-none border-0 bg-[#0006FF] text-white shadow-none ring-0 
                       hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none font-mono text-[16px]" asChild>
                 <a href="#contato">entre em contato</a>
               </Button>

@@ -14,7 +14,7 @@ export function DiagramNode({
   return (
     <div
       className={cn(
-        "rounded-[3px] border px-4 py-3 text-center",
+        "rounded-[3px] border px-4 py-3 text-center min-w-0 break-words",
         tone === "neutral" && "border-border-subtle bg-bg-primary",
         tone === "accent" && "border-accent/25 bg-accent/[0.06]",
         tone === "bad" && "border-red-500/20 bg-red-500/[0.04]",

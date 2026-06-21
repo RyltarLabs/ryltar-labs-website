@@ -57,17 +57,14 @@ const ARTICLES = [
 export function ArticlesSection() {
   return (
     <section id="conteudos" className="overflow-hidden bg-bg-primary py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 lg:grid-cols-[280px_1fr] lg:gap-20">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <BlurFade>
-              <div className="flex items-center gap-3 font-mono text-[16px] tracking-[0.12em] text-[#0006FF]">
-                <span className="h-px w-6 bg-[#0006FF]" />
-                conteúdos
-              </div>
-            </BlurFade>
+      {/* Título isolado do grid para alinhar perfeitamente com a margem do site */}
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-[clamp(24px,5vw,64px)]">
+        <BlurFade>
+          <div className="flex items-center gap-3 font-mono text-[16px] tracking-[0.12em] text-[#0006FF]">
+            <span className="h-px w-6 bg-[#0006FF]" />
+            conteúdos
           </div>
-        </div>
+        </BlurFade>
       </div>
 
       <BlurFade delay={0.15}>
@@ -77,7 +74,7 @@ export function ArticlesSection() {
               {ARTICLES.map((article) => (
                 <CarouselItem
                   key={article.title}
-                  className="basis-[290px] sm:basis-[320px]"
+                  className="basis-[85%] md:basis-[320px]"
                 >
                   <ArticleCard {...article} />
                 </CarouselItem>
@@ -127,7 +124,7 @@ function ArticleCard({
           variant="primary"
           size="sm"
           asChild
-          className="mt-6 w-fit rounded-none font-mono text-[16px] border-0 bg-[#0006FF] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none self-end"
+          className="mt-6 w-full sm:w-fit rounded-none font-mono text-[16px] border-0 bg-[#0006FF] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none sm:self-end"
         >
           <Link href={`/conteudos/${slug}`}>Ler</Link>
         </Button>

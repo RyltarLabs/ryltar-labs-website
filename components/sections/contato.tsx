@@ -17,7 +17,6 @@ export function Contato() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
 
-  // Observador para disparar a animação apenas quando a seção aparecer na tela
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +24,7 @@ export function Contato() {
           setIsInView(true);
         }
       },
-      { threshold: 0.3 } // Dispara quando 30% da seção estiver visível
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -41,7 +40,6 @@ export function Contato() {
       ref={sectionRef}
       className="flex flex-col items-center bg-bg-primary px-6 py-28 text-center lg:px-[clamp(24px,5vw,64px)]"
     >
-      {/* Estilos da animação de seleção */}
       <style>{`
         @keyframes highlight-text {
           0% { background-position: 100% 0; color: inherit; }
@@ -84,14 +82,14 @@ export function Contato() {
       </BlurFade>
 
       <BlurFade delay={0.3}>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button variant="ghost" className="font-mono text-[16px]" asChild>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4 w-full sm:w-auto">
+          <Button variant="ghost" className="font-mono text-[16px] w-full sm:w-auto" asChild>
             <a href="mailto:contato@ryltarlabs.com.br">
               <MailIcon className="h-4 w-4" />
               enviar email
             </a>
           </Button>
-          <Button variant="whatsapp" asChild className="rounded-none border-0 bg-[#00AA33] font-mono text-[16px] text-white shadow-none ring-0 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none">
+          <Button variant="whatsapp" asChild className="w-full sm:w-auto rounded-none border-0 bg-[#00AA33] font-mono text-[16px] text-white shadow-none ring-0 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="h-4 w-4" />
               conversar no WhatsApp

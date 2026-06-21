@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/#sobre", label: "sobre" },
   { href: "/#servicos", label: "serviços" },
-  // { href: "/#cases", label: "cases" },
   { href: "/#conteudos", label: "conteúdos" },
   { href: "/#faq", label: "faq" },
   { href: "/#contato", label: "contato" },
@@ -28,6 +26,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -35,22 +34,24 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (  
+  return (
     <header
-      className={`border-transparent fixed top-0 left-0 right-0 z-[200] h-[60px] transition-all duration-350${
-        scrolled
-          ? "bg-bg-primary/92 backdrop-blur-md border-b border-border"
-          : "bg-transparent border-transparent"
+      className={`border-transparent fixed top-0 left-0 right-0 z-[200] transition-all duration-350 ${
+        scrolled || isMobileMenuOpen
+          ? "bg-[#09090b]/95 backdrop-blur-md border-b border-border h-[60px]"
+          : "bg-transparent border-transparent h-[60px]"
       }`}
     >
       <div className="mx-auto flex h-full max-w-[1280px] items-center justify-between px-6 lg:px-[clamp(24px,5vw,64px)]">
         <Link
           href="/#"
-          className="font-mono text-[25px] font-medium text-text-primary"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="font-mono text-[25px] font-medium text-text-primary z-50"
         >
           ryltar-labs 
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="font-mono hidden items-center gap-10 lg:flex">
           {NAV_LINKS.map((link) => (
             <a
@@ -68,15 +69,56 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-
+        <div className="flex items-center gap-3 z-50">
+          {/* Botão Desktop */}
           <Button variant="nav" size="sm" asChild 
-                  className="rounded-none border-0 bg-[#0006FF] text-[16px] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none"
+                  className="hidden md:flex rounded-none border-0 bg-[#0006FF] text-[16px] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none"
           >
             <Link href="/#contato">falar conosco</Link>
           </Button>
+
+          {/* Botão Hambúrguer Mobile */}
+          <Button 
+            variant="nav" 
+            size="sm" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden rounded-none border-0 bg-[#0006FF] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none px-2"
+          >
+            {isMobileMenuOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            )}
+          </Button>
         </div>
       </div>
+
+      {/* Menu Overlay Mobile */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-[60px] left-0 w-full bg-[#09090b] md:hidden border-b border-zinc-800 shadow-2xl">
+          <div className="p-6 flex flex-col gap-6">
+            <nav className="flex flex-col gap-5 font-mono">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[18px] text-zinc-300 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <div className="pt-4 border-t border-zinc-800">
+              <Button variant="primary" asChild 
+                      className="w-full rounded-none border-0 bg-[#0006FF] text-[16px] text-white shadow-none ring-0 hover:bg-blue-900 hover:shadow-none hover:ring-0 focus-visible:ring-0 focus-visible:shadow-none"
+              >
+                <Link href="/#contato" onClick={() => setIsMobileMenuOpen(false)}>falar conosco</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

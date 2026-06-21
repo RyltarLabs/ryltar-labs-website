@@ -7,7 +7,6 @@ export function Sobre() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
 
-  // Garante que a animação CSS do highlight só dispare quando a seção estiver visível na tela
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,7 +14,7 @@ export function Sobre() {
           setIsInView(true);
         }
       },
-      { threshold: 0.3 } // Dispara quando 30% da seção estiver visível
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -31,7 +30,6 @@ export function Sobre() {
       ref={sectionRef}
       className="px-6 py-24 lg:px-[clamp(24px,5vw,64px)]"
     >
-      {/* Estilos separados: a classe base e a classe de animação (.animate-highlight) */}
       <style>{`
         @keyframes highlight-text {
           0% { background-position: 100% 0; color: inherit; }
@@ -41,7 +39,7 @@ export function Sobre() {
           background-image: linear-gradient(to right, #0006FF 50%, transparent 50%);
           background-size: 200% 100%;
           background-position: 100% 0;
-          display: inline; /* Garante que o fundo não ocupe espaço vazio na linha */
+          display: inline;
         }
         .animate-highlight {
           animation: highlight-text 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -49,13 +47,11 @@ export function Sobre() {
       `}</style>
 
       <div className="mx-auto max-w-[1200px]">
-        {/* Grid respeitando o espaçamento e posicionamento da imagem */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
           
-          {/* COLUNA ESQUERDA */}
           <div className="flex flex-col w-full">
             <BlurFade delay={0.1}>
-              <h2 className="mb-8 font-mono text-4xl lg:text-[42px] leading-[1.4] tracking-tight text-text-primary">
+              <h2 className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.4] tracking-tight text-text-primary">
                 Quando a <span className={`highlight-effect ${isInView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.6s' }}>construção de algo sério</span>
                 {" "}começa antes de existir um nome
               </h2>
@@ -84,7 +80,6 @@ export function Sobre() {
             </BlurFade>
 
             <BlurFade delay={0.3}>
-              {/* Imagem Vertical (Retrato) como na imagem de referência */}
               <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm">
                 <img 
                   src="https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=cropv" 
@@ -95,10 +90,9 @@ export function Sobre() {
             </BlurFade>
           </div>
 
-          {/* COLUNA DIREITA (Com margem no topo para criar o desnível exato da imagem) */}
-          <div className="flex flex-col w-full md:mt-[160px]">            
+          <div className="flex flex-col w-full mt-16 md:mt-[160px]">            
             <BlurFade delay={0.3}>
-              <h2 className="mb-8 font-mono text-4xl lg:text-[42px] leading-[1.1] tracking-tight text-text-primary">
+              <h2 className="mb-8 font-mono text-[clamp(32px,8vw,42px)] leading-[1.1] tracking-tight text-text-primary">
                 Nossa <span className={`highlight-effect ${isInView ? 'animate-highlight' : ''}`} style={{ animationDelay: '1.2s' }}>história</span>
               </h2>
             </BlurFade>
@@ -138,7 +132,6 @@ export function Sobre() {
             </BlurFade>
 
             <BlurFade delay={0.5}>
-              {/* Imagem Horizontal (Paisagem) como na imagem de referência */}
               <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm">
                 <img 
                   src="images/sections/about-section.png" 

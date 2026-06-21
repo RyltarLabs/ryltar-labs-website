@@ -6,11 +6,10 @@ export function SiteFooter() {
           ryltar-labs
         </span>
 
-        <nav className="flex gap-6">
+        <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
           {[
             { href: "/#sobre", label: "sobre" },
             { href: "/#servicos", label: "serviços" },
-            //{ href: "/#cases", label: "cases" },
             { href: "/#contato", label: "contato" },
           ].map((l) => (
             <a
@@ -23,7 +22,7 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <span className="font-mono text-[11px] text-text-tertiary">
+        <span className="font-mono text-[11px] text-text-tertiary text-center">
           © 2024 Ryltar Labs
         </span>
       </div>

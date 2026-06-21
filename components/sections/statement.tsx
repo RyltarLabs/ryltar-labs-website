@@ -12,7 +12,7 @@ export function Statement() {
         </BlurFade>
 
         <BlurFade delay={0.1}>
-          <blockquote className="max-w-[640px] font-display text-[22px] font-light leading-[1.45] text-text-primary lg:text-[26px]">
+          <blockquote className="max-w-[640px] font-display text-[clamp(20px,5vw,26px)] font-light leading-[1.45] text-text-primary">
             &ldquo;Em três meses transformamos nossa operação inteira.
             Processos que levavam horas hoje são automáticos.&rdquo;
           </blockquote>
