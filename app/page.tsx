@@ -9,6 +9,7 @@ import { Contato } from "@/components/sections/contato";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { ArticlesSection } from "@/components/sections/conteudos";
 
+
 export default function Home() {
   return (
     <>

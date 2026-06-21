@@ -16,10 +16,13 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
-  title: "Ryltar Labs — Engenharia de software sob medida",
-  description:
-    "Construímos soluções digitais sob medida para transformar operações, modernizar sistemas e gerar eficiência real. Front-end, back-end, modernização de legado, IA e ciência de dados.",
+  description: "Reunimos estratégia, design e desenvolvimento em um único processo eficiente.",
+  title: {
+    default: "Ryltar Labs",
+    template: "%s | Ryltar Labs",
+  },
 };
 
 export default function RootLayout({

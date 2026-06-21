@@ -3,15 +3,15 @@
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { useEffect, useRef, useState } from "react";
 
+
 export function Sobre() {
-  // Refs separados para garantir que a animação dispare no momento exato do scroll, especialmente no mobile onde a seção é longa
   const title1Ref = useRef<HTMLHeadingElement>(null);
   const title2Ref = useRef<HTMLHeadingElement>(null);
   const [isTitle1InView, setIsTitle1InView] = useState(false);
   const [isTitle2InView, setIsTitle2InView] = useState(false);
 
   useEffect(() => {
-    const observerOptions = { threshold: 0.5 }; // Dispara quando 50% do título estiver visível
+    const observerOptions = { threshold: 0.5 }; 
 
     const observer1 = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) setIsTitle1InView(true);
