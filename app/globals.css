@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  /* ── COLOR TOKENS — derived from espresso-labs DNA analysis ── */
+  --color-bg-primary: #090909;
+  --color-bg-surface: #101010;
+  --color-bg-hover: #161616;
+  --color-bg-active-dim: rgba(27, 110, 255, 0.08);
+
+  --color-border: #1c1c1c;
+  --color-border-subtle: #222222;
+  --color-border-active: #2a2a2a;
+
+  --color-text-primary: #efefef;
+  --color-text-secondary: #8a8a8a;
+  --color-text-tertiary: #4a4a4a;
+
+  --color-accent: #1b6eff;
+  --color-accent-light: #3b7fff;
+  --color-accent-green: #16a34a;
+
+  /* ── TYPE TOKENS ── */
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* ── MOTION TOKENS ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: var(--color-bg-primary);
+  --foreground: var(--color-text-primary);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(27, 110, 255, 0.25);
+}
+
+/* Hairline divider utility — primary structural device of the system */
+.hairline-t {
+  border-top: 1px solid var(--color-border);
+}
+.hairline-b {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Custom scrollbar for horizontal content carousel */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 2px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: var(--color-border);
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(27, 110, 255, 0.3);
+  border-radius: 2px;
+}
