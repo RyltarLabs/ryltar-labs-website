@@ -34,6 +34,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
         {children}
