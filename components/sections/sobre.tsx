@@ -38,14 +38,14 @@ export function Sobre() {
 
             <BlurFade delay={0.2}>
               <div className="space-y-6 text-[18px] font-light leading-[1.8] text-text-secondary mb-16">
-                <p>A Rytlar Labs não surgiu como um plano fechado nem como uma ideia perfeitamente estruturada desde o início. Ela apareceu primeiro como uma necessidade silenciosa dentro de um ambiente onde era evidente que conhecimento técnico, por si só, não bastava para resolver problemas reais com consistência. Havia sempre um intervalo entre entender um conceito e conseguir aplicá-lo de forma confiável em cenários complexos. Foi nesse intervalo que tudo começou a tomar forma.</p>
+                <p>A Rytlar Labs não surgiu como um plano fechado nem como uma ideia perfeitamente estruturada desde o início. Ela apareceu primeiro como uma necessidade silenciosa dentro de um ambiente onde era evidente que conhecimento técnico, por si só, não bastava para resolver problemas reais com consistência. Havia sempre um intervalo entre entender um concept e conseguir aplicá-lo de forma confiável em cenários complexos. Foi nesse intervalo que tudo começou a tomar forma.</p>
                 <p>Esse processo aconteceu dentro da Universidade Federal da Bahia, não como um evento isolado, mas como um acúmulo de experiências acadêmicas, projetos práticos e tentativas recorrentes de transformar teoria em execução. A universidade funcionou menos como ponto de partida formal e mais como um ambiente de pressão intelectual, onde ideias precisavam sobreviver ao teste da prática mesmo em contextos limitados de tempo, recursos e maturidade técnica.</p>
               </div>
             </BlurFade>
 
             <BlurFade delay={0.3}>
-              <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm">
-                <img src={MEDIA.aboutTeam} alt="Equipe colaborando" className="h-full w-full object-cover transition-all duration-500 opacity-100 grayscale-0 md:opacity-80 md:grayscale md:hover:opacity-100 md:hover:grayscale-0" />
+              <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm group">
+                <img src={MEDIA.aboutTeam} alt="Equipe colaborando" className="h-full w-full object-cover transition-all duration-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.02]" />
               </div>
             </BlurFade>
           </div>
@@ -53,7 +53,7 @@ export function Sobre() {
           <div className="flex flex-col w-full mt-20 md:mt-[180px]">            
             <BlurFade delay={0.3}>
               <h2 ref={title2Ref} className="mb-10 font-mono text-[clamp(38px,9vw,52px)] leading-[1.1] tracking-tight text-text-primary">
-                Nossa <span className={`highlight-effect ${isTitle2InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>história</span>
+                Nesta <span className={`highlight-effect ${isTitle2InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>história</span>
               </h2>
             </BlurFade>
 
@@ -67,8 +67,8 @@ export function Sobre() {
             </BlurFade>
 
             <BlurFade delay={0.5}>
-              <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm">
-                <img src={MEDIA.aboutCode} alt="Código e Arquitetura" className="h-full w-full object-cover transition-all duration-500 opacity-100 grayscale-0 md:opacity-80 md:grayscale md:hover:opacity-100 md:hover:grayscale-0" />
+              <div className="w-full aspect-[4/5] overflow-hidden bg-zinc-900 rounded-sm group">
+                <img src={MEDIA.aboutCode} alt="Código e Arquitetura" className="h-full w-full object-cover transition-all duration-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.02]" />
               </div>
             </BlurFade>
           </div>

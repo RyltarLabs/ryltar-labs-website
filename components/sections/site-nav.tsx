@@ -28,57 +28,31 @@ export function SiteNav() {
     
     const handleScrollTracking = () => {
       let activeSection = "";
-
-      const triggerPoint = window.innerHeight * 0.5;
+      const triggerPoint = window.innerHeight * 0.5; 
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const id = sections[i];
         const el = document.getElementById(id);
-
-        if (!el) continue;
-
-        const rect = el.getBoundingClientRect();
-
-        // seção ativa se o topo passou do trigger OU se ainda está visível na viewport
-        if (rect.top <= triggerPoint && rect.bottom > 0) {
-          activeSection = id;
-          break;
-        }
-      }
-
-      // fallback mais consistente: pega seção mais próxima do topo da viewport
-      if (!activeSection) {
-        let closest = "";
-        let closestDistance = Number.POSITIVE_INFINITY;
-
-        for (const id of sections) {
-          const el = document.getElementById(id);
-          if (!el) continue;
-
+        if (el) {
           const rect = el.getBoundingClientRect();
-          const distance = Math.abs(rect.top);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closest = id;
+          if (rect.top <= triggerPoint) {
+            activeSection = id;
+            break;
           }
         }
-
-        activeSection = closest;
       }
 
       if (!activeSection) {
         document.title = `Home | ${SITE_CONFIG.name}`;
-        return;
+      } else {
+        let label = activeSection.charAt(0).toUpperCase() + activeSection.slice(1);
+        
+        if (activeSection === "servicos") label = "Serviços";
+        if (activeSection === "conteudos") label = "Conteúdos";
+        if (activeSection === "faq") label = "FAQ";
+        
+        document.title = `${label} | ${SITE_CONFIG.name}`;
       }
-
-      let label = activeSection.charAt(0).toUpperCase() + activeSection.slice(1);
-
-      if (activeSection === "servicos") label = "Serviços";
-      if (activeSection === "conteudos") label = "Conteúdos";
-      if (activeSection === "faq") label = "FAQ";
-
-      document.title = `${label} | ${SITE_CONFIG.name}`;
     };
 
     window.addEventListener("scroll", handleScrollTracking, { passive: true });
@@ -117,11 +91,11 @@ export function SiteNav() {
           </nav>
 
           <div className="flex items-center gap-4 z-50">
-            <Button variant="nav" size="sm" asChild className="hidden md:flex">
+            <Button variant="nav" size="sm" asChild className="hidden lg:flex">
               <Link href="/#contato">falar conosco</Link>
             </Button>
 
-            <Button variant="nav" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden px-3 flex items-center justify-center">
+            <Button variant="nav" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden px-3 flex items-center justify-center">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <motion.line
                   x1="4" y1="6" x2="20" y2="6"
@@ -154,7 +128,7 @@ export function SiteNav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-[72px] left-0 w-full bg-[#09090b] md:hidden border-b border-zinc-800 shadow-2xl overflow-hidden"
+            className="absolute top-[72px] left-0 w-full bg-[#09090b] lg:hidden border-b border-zinc-800 shadow-2xl overflow-hidden"
           >
             <div className="p-8 flex flex-col gap-8">
               <nav className="flex flex-col gap-6 font-mono">

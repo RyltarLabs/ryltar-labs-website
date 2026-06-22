@@ -18,9 +18,11 @@ export function Faq() {
             <div className="mt-10 mx-auto max-w-[420px] border border-border-active p-10">
               <h4 className="font-mono text-[22px] font-normal leading-[1.3] tracking-[-0.01em] text-text-primary">Não encontrou o que estava procurando?</h4>
               <p className="mt-5 text-[16px] leading-[1.75] font-light text-text-secondary">Nossa equipe pode ajudar a identificar a solução ideal para você. Envie uma mensagem e nós entraremos em contato para orientá-lo.</p>
-              <Button variant="primary-flat" className="mt-8 w-full sm:w-auto text-[18px]" asChild>
-                <Link href="/#contato">entre em contato</Link>
-              </Button>
+                <div className="mt-8 w-full flex justify-center">
+                  <Button variant="primary-flat" className="mt-8 w-full sm:w-auto text-[18px]" asChild>
+                    <Link href="/#contato">entre em contato</Link>
+                  </Button>
+                </div>
             </div>
           </BlurFade>
         </div>
