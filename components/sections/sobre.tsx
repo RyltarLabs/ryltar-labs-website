@@ -53,7 +53,7 @@ export function Sobre() {
           <div className="flex flex-col w-full mt-20 md:mt-[180px]">            
             <BlurFade delay={0.3}>
               <h2 ref={title2Ref} className="mb-10 font-mono text-[clamp(38px,9vw,52px)] leading-[1.1] tracking-tight text-text-primary">
-                Nesta <span className={`highlight-effect ${isTitle2InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>história</span>
+                Nossa <span className={`highlight-effect ${isTitle2InView ? 'animate-highlight' : ''}`} style={{ animationDelay: '0.2s' }}>história</span>
               </h2>
             </BlurFade>
 
